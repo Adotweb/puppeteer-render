@@ -16,7 +16,7 @@ const scrape = (async (res) => {
 		  "--single-process",
 		  "--no-zygote"
 	  ],
-		  headless : "new"
+		  headless : false
   	});
 
 	console.log("stat1")
