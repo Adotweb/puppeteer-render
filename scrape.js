@@ -15,7 +15,8 @@ const scrape = (async (res) => {
 		  "--disable-setuid-sandbox",
 		  "--single-process",
 		  "--no-zygote"
-	  ]
+	  ],
+		  headless : "new"
   });
   const page = await browser.newPage();
 
