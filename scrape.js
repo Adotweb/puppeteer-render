@@ -17,37 +17,26 @@ const scrape = (async (res) => {
 		  "--no-zygote"
 	  ],
 		  headless : "new"
-  });
+  	});
+
+	console.log("stat1")
+	  
   const page = await browser.newPage();
 
+	console.log("stat2")
   // Navigate the page to a URL
-  await page.goto('https://developer.chrome.com/');
+  await page.goto('https://www.google.com/');
 
-  // Set screen size
-  await page.setViewport({width: 1080, height: 1024});
 
-  // Type into search box
-  await page.type('.devsite-search-field', 'automate beyond recorder');
+	  let content = await page.content()
 
-  // Wait and click on first result
-  const searchResultSelector = '.devsite-result-item-link';
-  await page.waitForSelector(searchResultSelector);
-  await page.click(searchResultSelector);
 
-  // Locate the full title with a unique string
-  const textSelector = await page.waitForSelector(
-    'text/Customize and automate'
-  );
-  const fullTitle = await textSelector?.evaluate(el => el.textContent);
-
-  // Print the full title
-  console.log('The title of this blog post is "%s".', fullTitle);
-
-res.send(fullTitle)
+	res.send(content)
 
   await browser.close();
 	return
 	}catch(e){
+		console.log(e)
 		res.send(e)
 	}
 });
