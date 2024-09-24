@@ -4,7 +4,8 @@ require("dotenv").config()
 
 const scrape = (async (res) => {
   // Launch the browser and open a new blank page
-  const browser = await puppeteer.launch({
+  try {
+	  const browser = await puppeteer.launch({
 	executablePath : process.env.NODE_ENV === "production" ?
 	  process.env.PUPPETEER_EXECUTABLE_PATH : 
 	  puppeteer.executablePath(),
@@ -44,6 +45,10 @@ const scrape = (async (res) => {
 res.send(fullTitle)
 
   await browser.close();
+	return
+	}catch(e){
+		res.send(e)
+	}
 });
 
 module.exports = {
